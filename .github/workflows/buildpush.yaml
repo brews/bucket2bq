@@ -1,0 +1,39 @@
+name: Build, push image
+
+on:
+  push:
+    branches:
+      - 'main'
+  release:
+    types:
+      - published
+
+env:
+  REGISTRY_NAME: ghcr.io/brews
+  IMAGE_NAME: bucket2bq
+
+jobs:
+  buildpush:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}
+      - name: Docker login
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_NAME }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
+          cache-to: type=inline
