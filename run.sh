@@ -27,9 +27,13 @@ if [ -z "${BUCKET2BQ_TABLE}" ]
 then
     error "Error: Missing BigQuery table (set environment variable BUCKET2BQ_TABLE)." 1
 fi
+if [ -z "${BUCKET2BQ_BUCKET}" ]
+then
+    error "Error: Missing target GCS bucket (set environment variable BUCKET2BQ_BUCKET)." 1
+fi
 if [ -z "${BUCKET2BQ_SCRATCH_BUCKET}" ]
 then
-    error "Error: Missing GCS bucket (set environment variable BUCKET2BQ_SCRATCH_BUCKET)." 1
+    error "Error: Missing scratch GCS bucket (set environment variable BUCKET2BQ_SCRATCH_BUCKET)." 1
 fi
 if [ -z "${BUCKET2BQ_LOCATION}" ]
 then

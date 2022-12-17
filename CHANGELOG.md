@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG.md
 ### Changed
 - Updated README.md to include basic documentation.
+### Fixed
+- `run.sh` now throws an error if `BUCKET2BQ_BUCKET` is not set.
 
 ## [0.1.0] - 2022-12-17
 - Initial release.
