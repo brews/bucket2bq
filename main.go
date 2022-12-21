@@ -38,7 +38,7 @@ var (
 	bucketName      *string
 	outputFile      *string
 	includeVersions *bool
-	VERSION         string = "0.1.0"
+	VERSION         string = "0.2.0"
 	BUFFER_SIZE     *int
 	GOMAXPROCS      *int
 	EXIT_STATUS     int = 0
